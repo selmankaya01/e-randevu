@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\selma\\source\\repos\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj": {}
+    "C:\\Users\\selma\\OneDrive\\Belgeler\\GitHub\\e-randevu\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\selma\\source\\repos\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj": {
+    "C:\\Users\\selma\\OneDrive\\Belgeler\\GitHub\\e-randevu\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\selma\\source\\repos\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj",
+        "projectUniqueName": "C:\\Users\\selma\\OneDrive\\Belgeler\\GitHub\\e-randevu\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj",
         "projectName": "Randevu_Yonetim_Sistemi",
-        "projectPath": "C:\\Users\\selma\\source\\repos\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj",
+        "projectPath": "C:\\Users\\selma\\OneDrive\\Belgeler\\GitHub\\e-randevu\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi.csproj",
         "packagesPath": "C:\\Users\\selma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\selma\\source\\repos\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\obj\\",
+        "outputPath": "C:\\Users\\selma\\OneDrive\\Belgeler\\GitHub\\e-randevu\\Randevu_Yonetim_Sistemi\\Randevu_Yonetim_Sistemi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

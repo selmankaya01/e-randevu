@@ -1,8 +1,25 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles {
+    <link href ='/lib/fullcalendar/core/main.css' rel='stylesheet'/>
+    <link href='/lib/fullcalendar/daygrid/main.css' rel='stylesheet' />
+}
+<div id="calendar">
 </div>
+
+@section Scripts{
+    <script src="~/lib/fullcalendar/core/main.js"></script>
+    <script src="~/lib/fullcalendar/daygrid/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarE1 = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarE1, {
+                plugins: ['dayGrid']
+            });
+            calendar.render();
+        });
+
+    </script>
+}
