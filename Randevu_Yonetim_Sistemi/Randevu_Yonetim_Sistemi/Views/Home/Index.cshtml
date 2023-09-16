@@ -9,8 +9,21 @@
 
 }
 
-<div id="calendar">
+<div class="row">
+    <div class="col-md-2">
+        <div id="otherEvents">
+            <p><strong>Sürüklenebilir Etkinlikler</strong></p>
+            <div class="fc-event" id="isValid">1.Etkinlikler</div><br />
+            <div class="fc-event" id="isNotValid">2.Etkinlikler</div><br />
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div id="calendar">
+        </div>
+    </div>
 </div>
+
+
 
 @section Scripts{
     <script src="~/lib/fullcalendar/core/main.js"></script>
@@ -23,6 +36,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var calendarE1 = document.getElementById('calendar');
+            var draggableEl = document.getElementById('otherEvents');
+
+            var Draggable = FullCalendarInteraction.Draggable;
+            new Draggable(draggableEl, {
+                itemSelector: '.fc-event',
+                eventData: function (eventEl) {
+                    return {
+                        title: eventEl.innerText,
+                        duration: '01:30'
+                    };
+                }
+            });
+
+
             var calendar = new FullCalendar.Calendar(calendarE1, {
                 plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
                 locale: 'tr',
@@ -125,6 +152,7 @@
 
                 // },
                 selectable: true,
+                droppable: true,
                 select: function (selectionInfo) {
                     console.log(selectionInfo);
 
@@ -162,7 +190,17 @@
                     console.log('resize edildi');    //event, prevEvent, revert()
                     //
                     // eventResizeInfo.revert(); // hata yaparsak geri alma
-                }
+                },
+                drop: function (dropInfo) {
+                    console.log('drop edildi.');
+                },
+                eventReceive: function (info) {
+                    console.log('Receive metodu tetiklendi.');
+                },
+                eventLeave: function (info) {
+                    console.log('Leave edildi.'); // takvimler arası olaylarda çalışır
+                },
+                dropAccept: '#isValid'
 
             });
             calendar.render();
