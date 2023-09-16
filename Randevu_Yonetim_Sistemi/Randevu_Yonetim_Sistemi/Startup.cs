@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Randevu_Yonetim_Sistemi.Data;
+using Randevu_Yonetim_Sistemi.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,32 @@ namespace Randevu_Yonetim_Sistemi
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/Denied";
+                options.Cookie.Name = "Dentist.Cookie";
+                options.SlidingExpiration = true;
+            });
+
             services.AddControllersWithViews();
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
