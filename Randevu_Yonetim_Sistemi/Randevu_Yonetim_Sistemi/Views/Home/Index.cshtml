@@ -8,6 +8,7 @@
     <link href="~/lib/fullcalendar/list/main.css" rel="stylesheet" />
 
 }
+
 <div id="calendar">
 </div>
 
@@ -17,15 +18,16 @@
     <script src="~/lib/fullcalendar/timegrid/main.js"></script>
     <script src="/lib/fullcalendar/core/locales/tr.js"></script>
     <script src="~/lib/fullcalendar/list/main.js"></script>
+    <script src="~/lib/fullcalendar/interaction/main.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var calendarE1 = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarE1, {
-                plugins: ['dayGrid', 'timeGrid', 'list'],
+                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
                 locale: 'tr',
                 header: {
-                    left: 'prev, next, today, getDate',
+                    left: 'prev, next, today, addEvent',
                     center: 'title',
                     right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'//timeGridFourDay
                     //listDay, listWeek, listMonth, listYear
@@ -34,23 +36,23 @@
                     left: 'prevYear',
                     right: 'nextYear'
                 },
-                slotDuration:'00:15:00',
-                slotLabelInterval:'00:15:00',
-                minTime:'08:00:00', //mesai saati başlama saatinden başlattım.
-                maxTime:'17:00:00', //mesai saati bitiminde bitirdim.
-                fixedWeekCount:false,
-                showNonCurrentDates:false,
+                slotDuration: '00:15:00', // slot aralıkları
+                slotLabelInterval: '00:15:00', // slotları aralıklı olarak yaz
+                minTime: '08:00:00', //mesai saati başlama saatinden başlattım.
+                maxTime: '17:00:00', //mesai saati bitiminde bitirdim.
+                fixedWeekCount: false,  // kullanılmayan haftaları çıkar
+                showNonCurrentDates: false, // kullanılmayan günleri çıkar
                 slotLabelFormat: {
-                hour:'numeric',
-                minute:'2-digit'
+                    hour: 'numeric',
+                    minute: '2-digit'
                 },
                 //handleWindowResize: true,
                 //aspectRatio:1.4,
                 /* firstDay:0, */ //pazardan başlayacak şekilde 0, 1, 2 şeklinde devam eder.
-                contentHeight:470,                
+                contentHeight: 470, // takvimin boyutu
                 defaultView: 'dayGridMonth',
                 weekends: false, // true yaparsak haftasonlarını dahil ederiz.
-                allDaySlot: false,                
+                allDaySlot: false, // tüm gün slotunu çıkart
                 titleFormat: {
                     year: 'numeric',
                     month: 'long',
@@ -58,7 +60,7 @@
                 },
                 titleRangeSeparator: '-',
                 columnHeaderFormat: {
-                    // month:'numeric',                    
+                    // month:'numeric',
                     // day:'numeric'
                     weekday: 'long',
                 },
@@ -76,19 +78,102 @@
                 //     day:'gün ve gün'
                 // },
                 customButtons: {
-                    getDate: {
-                        text: 'date',
+                    addEvent: {
+                        text: 'Ekle',
                         click: function () {
-                            var date = new Date();
-                            alert(date);
+                            var newEvent = {
+                                id: 'a',
+                                title: 'New Event',
+                                start: '2023-09-21T15:00:00.000Z',
+                                end: '2023-09-21T15:30:00.000Z'
+                            }
+                            calendar.addEvent(newEvent);
                         }
                     }
+                },
+                // eventColor:'red', //olay rengi
+                // eventBackgroundColor:'blue', // olay arkaplan rengi
+                // eventBorderColor:'black',
+                // eventTextColor:'white', // text rengi
+                // eventTimeFormat: {
+                //     hour:'',
+                //     minute:'',
+                //     second:'',
+
+                // },
+                //displayEventTime:true, // eventlerin içinde saatleri göstermesin
+                //displayEventEnd:true, // eventlerin içinde bitiş saatlerini göstermesin bu özellik yukardaki true olduğunda açılabilir.
+                // eventOrder:'start',// title, start, duration, allDay
+                // defaultDate:'2023-09-21',  // başlangıç zamanı
+                timeZone: 'UTC',
+                events: [
+                    {
+                        id: 'x',
+                        title: 'merhaba',
+                        start: '2023-09-21T08:00:00.000Z',
+                        end: '2023-09-21T08:30:00.000Z'
+                    },
+                    {
+                        id: 'y',
+                        title: 'merhaba',
+                        start: '2023-09-21T08:45:00.000Z',
+                        end: '2023-09-21T09:15:00.000Z'
+                    }
+                ],
+                // eventRender: function (info) {
+                //     console.log(info.event.title); //event,el, isMirror
+
+                // },
+                selectable: true,
+                select: function (selectionInfo) {
+                    console.log(selectionInfo);
+
+                },
+                eventClick: function (info) {
+                    alert(info.event.title);
+                },
+                // eventMouseEnter: function (onMouse) {
+                //     alert(onMouse.event.start);
+                // },
+                // eventMouseLeave: function (onLeave) {
+                //     alert(onLeave.event.id);
+                // }
+                editable: true,
+                eventStartEditable: true, //başlangıç zamanlarını güncelle
+                eventDragStart: function (info) {
+                    console.log('başladı');
+                },
+                eventDragStop: function (info) {
+                    console.log('bitti');
+                },
+                eventDrop: function (eventDropInfo) {
+                    console.log('droped');   //event, oldevent
+                },
+
+
+
+                eventResizeStart: function (info) {
+                    console.log('resize başladı');
+                },
+                eventResizeStop: function (info) {
+                    console.log('resize bitti');
+                },
+                eventResize: function (eventResizeInfo) {
+                    console.log('resize edildi');    //event, prevEvent, revert()
+                    //
+                    // eventResizeInfo.revert(); // hata yaparsak geri alma
                 }
-                
-                
-                 
+
             });
             calendar.render();
+            var events = calendar.getEvents();
+            console.log(events);
+
+            var id = 'x';
+            var event = calendar.getEventById(id);
+            console.log(event.title);
+
+            //calendar.renderEvents();
         });
 
     </script>
