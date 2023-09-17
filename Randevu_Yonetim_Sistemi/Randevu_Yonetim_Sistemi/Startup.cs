@@ -1,18 +1,18 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Randevu_Yonetim_Sistemi.Data;
-using Randevu_Yonetim_Sistemi.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Randevu_Yonetim_Sistemi.Data.Entity;
+using Randevu_Yonetim_Sistemi.Data;
 
 namespace Randevu_Yonetim_Sistemi
 {
@@ -32,20 +32,19 @@ namespace Randevu_Yonetim_Sistemi
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<AppUser, AppRole>(options =>
-            {
+            services.AddIdentity<AppUser, AppRole>(options => {
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedPhoneNumber = false;
+                //options.User.AllowedUserNameCharacters = "abcdasdada";
+                options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders();
 
 
             services.ConfigureApplicationCookie(options =>
@@ -56,6 +55,7 @@ namespace Randevu_Yonetim_Sistemi
                 options.Cookie.Name = "Dentist.Cookie";
                 options.SlidingExpiration = true;
             });
+
 
             services.AddControllersWithViews();
             services.AddRazorPages()
@@ -88,7 +88,7 @@ namespace Randevu_Yonetim_Sistemi
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Profile}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

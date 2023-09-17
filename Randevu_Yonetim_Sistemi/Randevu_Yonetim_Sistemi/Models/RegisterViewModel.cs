@@ -21,7 +21,7 @@ namespace Randevu_Yonetim_Sistemi.Models
         [Display(Name = "Emailiniz:")]
         [EmailAddress(ErrorMessage ="Lütfen Email alanını kontrol ediniz.")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Lütfen randevu rengini Belirtiniz.")]
+       
         [Display(Name = "Randevu Rengi:")]
         public string Color { get; set; }
         

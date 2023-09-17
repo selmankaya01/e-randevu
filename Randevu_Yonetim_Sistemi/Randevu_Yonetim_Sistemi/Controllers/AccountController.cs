@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V3.Pages.Account.Internal;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Randevu_Yonetim_Sistemi.Data.Entity;
 using Randevu_Yonetim_Sistemi.Models;
-using System.Threading.Tasks;
 
 namespace Randevu_Yonetim_Sistemi.Controllers
 {
@@ -13,7 +15,8 @@ namespace Randevu_Yonetim_Sistemi.Controllers
         private SignInManager<AppUser> _signInManager;
         private RoleManager<AppRole> _roleManager;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+            RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -34,20 +37,21 @@ namespace Randevu_Yonetim_Sistemi.Controllers
                 return View(model);
             }
 
-            var user =await _userManager.FindByNameAsync(model.UserName);
-            if (user==null)
+            var user = await _userManager.FindByNameAsync(model.UserName);
+            if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Kullanıcı Bulunamadı");
+                ModelState.AddModelError(String.Empty, "Kullanıcı bulunamadı.");
                 return View(model);
             }
+
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Profile");
             }
-            ModelState.AddModelError(string.Empty, "Oturum Açmada Hata Oluştu.");
 
+            ModelState.AddModelError(String.Empty, "Oturum açmada bir hata oluştu.");
             return View(model);
         }
 
@@ -57,7 +61,6 @@ namespace Randevu_Yonetim_Sistemi.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -72,7 +75,7 @@ namespace Randevu_Yonetim_Sistemi.Controllers
                 Surname = model.Surname,
                 Email = model.Email,
                 Color = model.Color,
-                IsDentist= model.IsDentist
+                IsDentist = model.IsDentist
             };
 
             IdentityResult result = _userManager.CreateAsync(user, model.Password).Result;
@@ -101,13 +104,15 @@ namespace Randevu_Yonetim_Sistemi.Controllers
         {
             return View();
         }
+
+
         private bool AddRole(string roleName)
         {
             if (!_roleManager.RoleExistsAsync(roleName).Result)
             {
                 AppRole role = new AppRole()
                 {
-                    Name = roleName,
+                    Name = roleName
                 };
 
                 IdentityResult result = _roleManager.CreateAsync(role).Result;

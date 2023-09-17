@@ -829,3 +829,5 @@ C:\Users\selma\OneDrive\Belgeler\GitHub\e-randevu\Randevu_Yonetim_Sistemi\Randev
 C:\Users\selma\OneDrive\Belgeler\GitHub\e-randevu\Randevu_Yonetim_Sistemi\Randevu_Yonetim_Sistemi\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
 C:\Users\selma\OneDrive\Belgeler\GitHub\e-randevu\Randevu_Yonetim_Sistemi\Randevu_Yonetim_Sistemi\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\selma\OneDrive\Belgeler\GitHub\e-randevu\Randevu_Yonetim_Sistemi\Randevu_Yonetim_Sistemi\obj\Debug\netcoreapp3.1\Razor\Views\Account\Denied.cshtml.g.cs
+C:\Users\selma\OneDrive\Belgeler\GitHub\e-randevu\Randevu_Yonetim_Sistemi\Randevu_Yonetim_Sistemi\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Dentist.cshtml.g.cs
+C:\Users\selma\OneDrive\Belgeler\GitHub\e-randevu\Randevu_Yonetim_Sistemi\Randevu_Yonetim_Sistemi\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Secretary.cshtml.g.cs
